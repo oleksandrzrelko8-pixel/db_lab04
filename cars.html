@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>🚙 Автопарк клієнтів</h2>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Марка і модель</th>
+            <th>Рік</th>
+            <th>Держномер</th>
+            <th>Пробіг (км)</th>
+            <th>Власник</th>
+            <th>Телефон власника</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for car in cars %}
+        <tr>
+            <td>{{ car[0] }}</td>
+            <td><strong>{{ car[1] }} {{ car[2] }}</strong></td>
+            <td>{{ car[3] }}</td>
+            <td><span class="plate">{{ car[4] }}</span></td>
+            <td>{{ car[5] }}</td>
+            <td>{{ car[6] }}</td>
+            <td>{{ car[7] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

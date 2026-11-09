@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="stats-grid">
+    <div class="card">
+        <h3>Клієнтів у базі</h3>
+        <p class="stat-number">{{ clients }}</p>
+    </div>
+    <div class="card">
+        <h3>Обслуговується авто</h3>
+        <p class="stat-number">{{ cars }}</p>
+    </div>
+    <div class="card">
+        <h3>Нарядів у роботі</h3>
+        <p class="stat-number">{{ active_orders }}</p>
+    </div>
+    <div class="card">
+        <h3>Загальна виручка</h3>
+        <p class="stat-number">{{ "%.2f"|format(revenue) }} грн</p>
+    </div>
+</div>
+
+<h3>⚡ Активні наряди (Представлення v_active_repair_orders)</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Дата</th>
+            <th>Клієнт</th>
+            <th>Телефон</th>
+            <th>Авто</th>
+            <th>Держномер</th>
+            <th>Майстер</th>
+            <th>Сума</th>
+            <th>Статус</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for o in orders %}
+        <tr>
+            <td>#{{ o[0] }}</td>
+            <td>{{ o[1].strftime('%d.%m.%Y %H:%M') if o[1] else '' }}</td>
+            <td>{{ o[3] }}</td>
+            <td>{{ o[4] }}</td>
+            <td>{{ o[5] }}</td>
+            <td><strong>{{ o[6] }}</strong></td>
+            <td>{{ o[7] }} ({{ o[8] }})</td>
+            <td>{{ "%.2f"|format(o[9]) }} грн</td>
+            <td><span class="badge badge-{{ o[2]|lower }}">{{ o[2] }}</span></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

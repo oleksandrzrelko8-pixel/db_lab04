@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex-header">
+    <h2>👥 Реєстр клієнтів</h2>
+</div>
+
+<div class="two-columns">
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ПІБ Клієнта</th>
+                    <th>Телефон</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in clients %}
+                <tr>
+                    <td>{{ c[0] }}</td>
+                    <td><strong>{{ c[1] }} {{ c[2] }}</strong></td>
+                    <td>{{ c[3] }}</td>
+                    <td>{{ c[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="form-container">
+        <h3>+ Додати нового клієнта</h3>
+        <form method="POST">
+            <div class="form-group">
+                <label>Ім'я:</label>
+                <input type="text" name="first_name" required>
+            </div>
+            <div class="form-group">
+                <label>Прізвище:</label>
+                <input type="text" name="last_name" required>
+            </div>
+            <div class="form-group">
+                <label>Телефон:</label>
+                <input type="text" name="phone" placeholder="+380..." required>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" name="email">
+            </div>
+            <button type="submit" class="btn btn-primary">Зберегти в БД</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

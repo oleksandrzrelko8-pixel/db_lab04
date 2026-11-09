@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>📊 Ефективність роботи майстрів (Представлення v_mechanic_performance)</h2>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Майстер</th>
+            <th>Спеціалізація</th>
+            <th>Всього нарядів</th>
+            <th>Виконано успішно</th>
+            <th>Згенеровано виручки</th>
+            <th>Середній чек</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in performance %}
+        <tr>
+            <td><strong>{{ p[1] }}</strong></td>
+            <td>{{ p[2] }}</td>
+            <td>{{ p[3] }}</td>
+            <td>{{ p[4] }}</td>
+            <td>{{ "%.2f"|format(p[5]) }} грн</td>
+            <td>{{ "%.2f"|format(p[6]) }} грн</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex-header">
+    <h2>📋 Замовлення-наряди на ремонт</h2>
+    <a href="{{ url_for('add_order') }}" class="btn btn-primary">+ Відкрити наряд</a>
+</div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Дата відкриття</th>
+            <th>Клієнт</th>
+            <th>Автомобіль</th>
+            <th>Відповідальний майстер</th>
+            <th>Сума (грн)</th>
+            <th>Статус</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for o in orders %}
+        <tr>
+            <td><strong>#{{ o[0] }}</strong></td>
+            <td>{{ o[1].strftime('%d.%m.%Y %H:%M') if o[1] else '' }}</td>
+            <td>{{ o[4] }}</td>
+            <td>{{ o[5] }} ({{ o[6] }})</td>
+            <td>{{ o[7] }}</td>
+            <td>{{ "%.2f"|format(o[3]) }} грн</td>
+            <td><span class="badge badge-{{ o[2]|lower }}">{{ o[2] }}</span></td>
+            <td>
+                {% if o[2] != 'Completed' %}
+                <a href="{{ url_for('complete_order', order_id=o[0]) }}" class="btn btn-success btn-sm">Здати клієнту</a>
+                {% else %}
+                <span class="text-muted">Закрито</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

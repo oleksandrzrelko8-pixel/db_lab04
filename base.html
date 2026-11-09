@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Автосервіс «DriveMaster»{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <h2>🚗 Автосервіс «DriveMaster»</h2>
+            <nav>
+                <a href="{{ url_for('index') }}">Панель</a>
+                <a href="{{ url_for('clients') }}">Клієнти</a>
+                <a href="{{ url_for('cars') }}">Автомобілі</a>
+                <a href="{{ url_for('orders') }}">Наряди на ремонт</a>
+                <a href="{{ url_for('add_order') }}">+ Новий наряд</a>
+                <a href="{{ url_for('analytics') }}">Аналітика майстрів</a>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, msg in messages %}
+                    <div class="alert alert-{{ category }}">{{ msg }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
